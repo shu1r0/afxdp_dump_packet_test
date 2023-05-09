@@ -60,14 +60,14 @@ SEC("xdp_sock") int xdp_tamper(struct xdp_md *ctx)
         if(data + sizeof(*ip) > data_end) {
           return XDP_ABORTED;
         }
-        return bpf_redirect_map(&xsks_map, index, 0);
+        return bpf_redirect_map(&xsks_map, index, XDP_DROP);
         break;
       case ETH_P_IPV6:
         ipv6 = data + sizeof(*eth);
         if(data + sizeof(*ipv6) > data_end) {
           return XDP_ABORTED;
         }
-        return bpf_redirect_map(&xsks_map, index, 0);
+        return bpf_redirect_map(&xsks_map, index, XDP_DROP);
         break;
       default:
         break;

@@ -22,6 +22,7 @@ func main() {
 	if err != nil {
 		log.Fatalln("Socket Create Error %s", err)
 	}
+	defer xsk.Close()
 
 	xsk.OnPacket(func(pkt gopacket.Packet) {
 		log.Printf("received frame:\n%+v", pkt)
